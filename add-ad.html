@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>قائمة إضافة إعلان</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="add-ad.css">
+</head>
+<body>
+
+<section class="demo" aria-label="اختيار شكل القائمة">
+  <div class="demo-top">
+    <h1>قائمة «إضافة إعلان»</h1>
+    <a href="index.html">نموذج شاشة الوظيفة</a>
+  </div>
+  <div class="variants" id="variants">
+    <button type="button" data-v="a" class="on">أ · تصميمك<small>لوحة بأزرار نصية</small></button>
+    <button type="button" data-v="b">ب · مجموعات بأيقونات<small>المقترح</small></button>
+    <button type="button" data-v="c">ج · شبكة بطاقات<small>مثل الرئيسية</small></button>
+    <button type="button" data-v="d">د · قائمة من زر +<small>بدون لوحة</small></button>
+  </div>
+  <p class="demo-desc" id="desc"></p>
+</section>
+
+<main class="phone" id="phone">
+
+  <div class="home">
+    <h2 class="services-title">خدمات المنصة</h2>
+    <div class="grid" id="services"></div>
+  </div>
+
+  <header class="top">
+    <div class="hello">
+      <div class="avatar" aria-hidden="true">م</div>
+      <div>
+        <small>مرحبا بك</small>
+        <strong>محمود أحمد</strong>
+      </div>
+    </div>
+    <button type="button" class="bell" aria-label="الإشعارات، 3 جديدة">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="#1C253C" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7v4.2l-1.7 3.1A1 1 0 0 0 4.2 18h15.6a1 1 0 0 0 .9-1.7L19 13.2V9a7 7 0 0 0-7-7zm-2.8 17.5a3 3 0 0 0 5.6 0z"/></svg>
+      <span class="badge">3</span>
+    </button>
+  </header>
+
+  <div class="overlay" id="overlay"></div>
+
+  <nav class="nav" aria-label="التنقل الرئيسي">
+    <span class="indicator" id="indicator"></span>
+    <button type="button">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 4a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7zm0 14a8 8 0 0 1-6-2.7c.9-1.9 3.2-3.3 6-3.3s5.1 1.4 6 3.3A8 8 0 0 1 12 20z"/></svg>
+      حسابي
+    </button>
+    <button type="button" id="add-btn" aria-haspopup="dialog" aria-expanded="false">
+      <svg class="plus" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" fill="#1C253C"/><path d="M12 7v10M7 12h10" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/></svg>
+      إضافة اعلان
+    </button>
+    <button type="button" class="on" id="home-btn">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10.6 3.4a2 2 0 0 1 2.8 0l7 6.4c.4.4.6.9.6 1.4V19a2 2 0 0 1-2 2h-4v-3.2c0-1.3-1.3-2.3-3-2.3s-3 1-3 2.3V21H5a2 2 0 0 1-2-2v-7.8c0-.5.2-1 .6-1.4zM12 9a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>
+      الرئيسية
+    </button>
+  </nav>
+
+  <div id="menus"></div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</main>
+
+<script src="add-ad.js"></script>
+</body>
+</html>
