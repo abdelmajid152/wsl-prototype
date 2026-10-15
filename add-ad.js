@@ -50,7 +50,7 @@
   ];
 
   var DESC = {
-    a: 'تصميمك كما هو: لوحة تنزلق من الأسفل وتغطي الشريط، الأزرار تظهر تباعاً، وعلامة × تدور مكان زر +. اسحب المقبض للأسفل للإغلاق.',
+    a: 'تصميمك كما هو: فقاعة تخرج من زر + وتكبر للأعلى، ثم تظهر الأزرار تباعاً. للإغلاق اضغط + مرة أخرى أو خارج القائمة أو اسحب المقبض للأسفل.',
     b: 'المقترح: نفس الفكرة لكن بأيقونة وعنوان قصير ووصف لكل خيار، مقسّمة إلى مجموعات. اللوحة تطفو فوق الشريط وزر + نفسه يصبح ×.',
     c: 'شبكة بطاقات بنفس أسلوب «خدمات المنصة» في الرئيسية. أهداف لمس كبيرة ومألوفة للمستخدم.',
     d: 'الخيارات تنبثق من زر + مباشرة بدون لوحة. أخف وأسرع، ويناسب إذا كانت الخيارات قصيرة.'
@@ -81,13 +81,28 @@
 
   function buildA() {
     return '<section class="menu sheet sheet-a"' + dialogAttrs() + '>' +
-      '<button type="button" class="handle" aria-label="إغلاق"></button>' +
+      '<svg class="bubble" aria-hidden="true"><polygon fill="#FFFFFF" stroke="#FFFFFF" stroke-linejoin="round"/></svg>' +
+      '<div class="body"><button type="button" class="handle" aria-label="إغلاق"></button>' +
       '<div class="list">' + ITEMS.map(function (it, i) {
         return '<button type="button" class="item pill" data-i="' + i + '" style="--i:' + i + '"><span>' + it.full + '</span>' + CHEVRON + '</button>';
-      }).join('') + '</div>' +
-      '<button type="button" class="close-x" data-close aria-label="إغلاق">' +
-      '<svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#1C253C"/><path d="M8.5 8.5l7 7M15.5 8.5l-7 7" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/></svg>' +
-      '</button></section>';
+      }).join('') + '</div></div></section>';
+  }
+
+  // Draws the bubble: a rounded box plus a tail that narrows down to the + button.
+  // Rounded corners come from a thick round-joined stroke around an inset polygon.
+  var TAIL = 160, R = 34;
+  function shapeBubble(sheet) {
+    var body = sheet.querySelector('.body');
+    if (!body) return;
+    var w = sheet.offsetWidth, b = body.offsetHeight, h = b + TAIL;
+    sheet.style.height = h + 'px';
+    var svg = sheet.querySelector('.bubble');
+    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+    var poly = svg.querySelector('polygon');
+    poly.setAttribute('stroke-width', 2 * R);
+    poly.setAttribute('points', [
+      [R, R], [w - R, R], [w - R, b - R], [w / 2, h - R], [R, b - R]
+    ].map(function (p) { return p.join(','); }).join(' '));
   }
 
   function buildB() {
@@ -147,7 +162,9 @@
     if (isOpen) return;
     isOpen = true;
     clearTimeout(keepNavTimer);
-    phone.classList.toggle('keep-nav', variant !== 'a');
+    phone.classList.add('keep-nav');
+    phone.classList.toggle('rotate-plus', variant !== 'a');
+    shapeBubble(current);
     phone.classList.add('open');
     current.style.removeProperty('--drag');
     // Force a style flush so the enter transition always runs
@@ -166,7 +183,7 @@
     isOpen = false;
     current.classList.remove('in');
     phone.classList.remove('open');
-    keepNavTimer = setTimeout(function () { phone.classList.remove('keep-nav'); }, 320);
+    keepNavTimer = setTimeout(function () { phone.classList.remove('keep-nav', 'rotate-plus'); }, 320);
     addBtn.setAttribute('aria-expanded', 'false');
     addBtn.classList.remove('on');
     homeBtn.classList.add('on');
