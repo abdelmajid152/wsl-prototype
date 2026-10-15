@@ -260,7 +260,7 @@ h1, h2, h3, p { margin: 0; }
 /* A: your design. A speech-bubble sheet whose tail points at the + button.
    It grows out of the button; the nav stays on top. */
 .sheet-a {
-  bottom: 50px;
+  bottom: 28px;
   left: 6px; right: 6px;
   background: none;
   transform-origin: 50% 100%;
@@ -275,7 +275,7 @@ h1, h2, h3, p { margin: 0; }
 }
 .sheet-a.dragging { transition: none; }
 .bubble { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.sheet-a .body { position: relative; padding: 0 15px 20px; }
+.sheet-a .body { position: relative; padding: 0 15px 36px; }
 .sheet-a .list { display: flex; flex-direction: column; gap: 16px; padding-top: 7px; }
 .pill {
   width: 100%;
