@@ -35,25 +35,17 @@
   // The six "add ad" choices. `full` is your original wording (option A);
   // title/sub are the shorter labels used by the alternatives.
   var ITEMS = [
-    { icon: 'briefcase', group: 'me', full: 'إضافة إعلان كمرشح يبحث عن عمل', title: 'أبحث عن عمل', sub: 'أعلن عن نفسك كمرشح' },
-    { icon: 'users', group: 'others', full: 'إضافة إعلان كفرد لطلب مرشحين للعمل', title: 'أطلب مرشحين للعمل', sub: 'إعلان كفرد يبحث عن موظفين' },
-    { icon: 'cap', group: 'others', full: 'إضافة إعلان كفرد لدورات تأهيل و تدريب الموظفين', title: 'دورات وتدريب', sub: 'تأهيل وتدريب الموظفين' },
-    { icon: 'access', group: 'others', full: 'إضافة إعلان كفرد لخدمات كبار السن و ذوي الاحتياجات الخاصة', title: 'كبار السن وذوو الاحتياجات', sub: 'أعلن عن خدمتك' },
-    { icon: 'drop', group: 'free', full: 'إضافة إعلان طلبات التبرع بالدم ( الخدمة مجانية )', title: 'طلب تبرع بالدم', sub: 'لمن يحتاج متبرعين', free: true },
-    { icon: 'cv', group: 'me', full: 'إنشاء سيرة ذاتية احترافية فقط', title: 'سيرة ذاتية احترافية', sub: 'إنشاء فقط، بدون إعلان' }
-  ];
-
-  var GROUPS = [
-    { key: 'me', label: 'لنفسك' },
-    { key: 'others', label: 'تطلب أو تقدّم خدمة' },
-    { key: 'free', label: 'خدمات مجانية' }
+    { icon: 'briefcase', full: 'إضافة إعلان كمرشح يبحث عن عمل', title: 'أبحث عن عمل', sub: 'أعلن عن نفسك كمرشح' },
+    { icon: 'users', full: 'إضافة إعلان كفرد لطلب مرشحين للعمل', title: 'أطلب مرشحين للعمل', sub: 'إعلان كفرد يبحث عن موظفين' },
+    { icon: 'cap', full: 'إضافة إعلان كفرد لدورات تأهيل و تدريب الموظفين', title: 'دورات وتدريب', sub: 'تأهيل وتدريب الموظفين' },
+    { icon: 'access', full: 'إضافة إعلان كفرد لخدمات كبار السن و ذوي الاحتياجات الخاصة', title: 'كبار السن وذوو الاحتياجات', sub: 'أعلن عن خدمتك' },
+    { icon: 'drop', full: 'إضافة إعلان طلبات التبرع بالدم ( الخدمة مجانية )', title: 'طلب تبرع بالدم', sub: 'لمن يحتاج متبرعين', free: true },
+    { icon: 'cv', full: 'إنشاء سيرة ذاتية احترافية فقط', title: 'سيرة ذاتية احترافية', sub: 'إنشاء فقط، بدون إعلان' }
   ];
 
   var DESC = {
     a: 'تصميمك كما هو: فقاعة تخرج من زر + وتكبر للأعلى، ثم تظهر الأزرار تباعاً. للإغلاق اضغط + مرة أخرى أو خارج القائمة أو اسحب المقبض للأسفل.',
-    b: 'المقترح: نفس الفكرة لكن بأيقونة وعنوان قصير ووصف لكل خيار، مقسّمة إلى مجموعات. اللوحة تطفو فوق الشريط وزر + نفسه يصبح ×.',
-    c: 'شبكة بطاقات بنفس أسلوب «خدمات المنصة» في الرئيسية. أهداف لمس كبيرة ومألوفة للمستخدم.',
-    d: 'الخيارات تنبثق من زر + مباشرة بدون لوحة. أخف وأسرع، ويناسب إذا كانت الخيارات قصيرة.'
+    b: 'المقترح: نفس الفكرة لكن بأيقونة وعنوان قصير ووصف لكل خيار. اللوحة تطفو فوق الشريط وزر + نفسه يصبح ×.'
   };
 
   function $(id) { return document.getElementById(id); }
@@ -106,45 +98,18 @@
   }
 
   function buildB() {
-    var n = 0;
-    var body = GROUPS.map(function (g) {
-      var rows = ITEMS.map(function (it, i) {
-        if (it.group !== g.key) return '';
-        return '<button type="button" class="item row" data-i="' + i + '" style="--i:' + (n++) + '">' +
-          '<span class="ico">' + icon(it.icon) + '</span>' +
-          '<span class="txt"><b>' + it.title + (it.free ? '<span class="free">مجاني</span>' : '') + '</b><small>' + it.sub + '</small></span>' +
-          CHEVRON + '</button>';
-      }).join('');
-      return '<div class="group-label item" style="--i:' + n + '">' + g.label + '</div>' + rows;
-    }).join('');
     return '<section class="menu sheet sheet-b"' + dialogAttrs() + '>' +
       '<button type="button" class="handle" aria-label="إغلاق"></button>' +
       '<div class="sheet-head"><h2>ماذا تريد أن تضيف؟</h2><p>اختر نوع الإعلان</p></div>' +
-      body + '</section>';
-  }
-
-  function buildC() {
-    return '<section class="menu sheet sheet-c"' + dialogAttrs() + '>' +
-      '<button type="button" class="handle" aria-label="إغلاق"></button>' +
-      '<div class="sheet-head"><h2>ماذا تريد أن تضيف؟</h2></div>' +
-      '<div class="tiles">' + ITEMS.map(function (it, i) {
-        var wide = i >= 4 ? ' wide' : '';
-        return '<button type="button" class="item mini' + wide + '" data-i="' + i + '" style="--i:' + i + '">' +
+      ITEMS.map(function (it, i) {
+        return '<button type="button" class="item row" data-i="' + i + '" style="--i:' + i + '">' +
           '<span class="ico">' + icon(it.icon) + '</span>' +
-          '<span><b>' + it.title + (it.free ? '<span class="free">مجاني</span>' : '') + '</b><br><small>' + it.sub + '</small></span></button>';
-      }).join('') + '</div></section>';
+          '<span class="txt"><b>' + it.title + (it.free ? '<span class="free">مجاني</span>' : '') + '</b><small>' + it.sub + '</small></span>' +
+          CHEVRON + '</button>';
+      }).join('') + '</section>';
   }
 
-  function buildD() {
-    var last = ITEMS.length - 1;
-    return '<div class="menu dial"' + dialogAttrs() + '>' + ITEMS.map(function (it, i) {
-      return '<button type="button" class="item chip" data-i="' + i + '" style="--r:' + (last - i) + '">' +
-        '<span class="ico">' + icon(it.icon, 18) + '</span>' + it.title +
-        (it.free ? '<span class="free">مجاني</span>' : '') + '</button>';
-    }).join('') + '</div>';
-  }
-
-  var BUILDERS = { a: buildA, b: buildB, c: buildC, d: buildD };
+  var BUILDERS = { a: buildA, b: buildB };
 
   function render() {
     menusBox.innerHTML = BUILDERS[variant]();

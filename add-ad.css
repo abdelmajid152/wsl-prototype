@@ -291,8 +291,8 @@ h1, h2, h3, p { margin: 0; }
   text-align: right;
 }
 
-/* B and C: floating sheet above the nav; the nav + turns into × */
-.sheet-b, .sheet-c {
+/* B: floating sheet above the nav; the nav + turns into × */
+.sheet-b {
   bottom: 92px;
   left: 12px; right: 12px;
   border-radius: 28px;
@@ -305,8 +305,7 @@ h1, h2, h3, p { margin: 0; }
 .sheet-head h2 { font-size: 16px; font-weight: 700; }
 .sheet-head p { font-size: 12px; color: var(--muted); margin-top: 2px; }
 
-/* B: grouped rows with icons */
-.group-label { font-size: 11px; font-weight: 700; color: var(--muted); padding: 10px 8px 6px; }
+/* B: rows with icons */
 .row {
   width: 100%;
   min-height: 60px;
@@ -341,74 +340,10 @@ h1, h2, h3, p { margin: 0; }
   vertical-align: 2px;
 }
 
-/* C: tile grid */
-.tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.mini {
-  min-height: 112px;
-  padding: 12px 8px;
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  background: var(--card);
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
-  text-align: center;
-}
-.mini .ico {
-  width: 48px; height: 48px;
-  border-radius: 200px;
-  background: var(--tint);
-  color: var(--gold);
-  display: flex; align-items: center; justify-content: center;
-}
-.mini b { font-size: 13px; font-weight: 700; line-height: 1.4; }
-.mini small { font-size: 11px; color: var(--muted); }
-.mini.wide { grid-column: 1 / -1; min-height: 64px; flex-direction: row; justify-content: flex-start; padding: 8px 12px; text-align: right; }
-.mini.wide .ico { width: 44px; height: 44px; }
-
-/* ---------- D: speed dial out of the + button ---------- */
-.dial {
-  position: absolute;
-  left: 16px; right: 16px; bottom: 96px;
-  z-index: 20;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  pointer-events: none;
-}
-.dial.in { pointer-events: auto; }
-.dial .chip {
-  min-height: 44px;
-  max-width: 100%;
-  padding: 8px 14px 8px 10px;
-  border: 1.5px solid var(--gold);
-  border-radius: 30px;
-  background: #FFFFFF;
-  box-shadow: 0 6px 16px rgba(28, 37, 60, .2);
-  display: flex; align-items: center; gap: 10px;
-  font-size: 13px;
-  text-align: right;
-  transform-origin: 50% 100%;
-}
-.dial .chip .ico {
-  width: 30px; height: 30px;
-  border-radius: 200px;
-  background: var(--tint);
-  color: var(--gold);
-  display: flex; align-items: center; justify-content: center;
-  flex: none;
-}
-.dial .item { transform: translateY(24px) scale(.7); }
-.dial.in .item {
-  transform: none;
-  transition: opacity .25s ease calc(var(--r) * 40ms), transform .45s var(--ease-spring) calc(var(--r) * 40ms);
-}
-
-/* Nav + becomes × for B, C and D */
+/* Nav + becomes × for B */
 .phone.open.rotate-plus .nav .plus { transform: rotate(45deg); }
 .phone.open.keep-nav .nav { z-index: 21; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: .01ms !important; transition-delay: 0s !important; }
 }
-.dial { transition: visibility 0s linear .25s; }
-.dial.in { transition: visibility 0s; }
